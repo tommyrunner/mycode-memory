@@ -1,0 +1,7 @@
+interface:
+  display_name: "MyCode Memory"
+  short_description: "记忆并延续用户在具体项目中的个人编码习惯，而不是通用编码规则"
+  default_prompt: "使用 $mycode-memory 读取并延续我的个人编码习惯；不要补充常规编码规则，只有明确要求更新记忆时才修改 memory.md。"
+
+policy:
+  allow_implicit_invocation: true
