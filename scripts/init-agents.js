@@ -3,8 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const memoryDir = path.join(process.cwd(), ".mycode-memory");
-const memoryFile = path.join(memoryDir, "memory.md");
+const agentsFile = path.join(process.cwd(), "AGENTS.md");
 
 const template = `# MyCode Memory
 
@@ -21,6 +20,16 @@ const template = `# MyCode Memory
 - 不要把新信息无意义地一直追加到末尾。
 - 不使用“当前模块”“当前页面”“当前这次观察”等临时上下文表述。
 - 全文使用中文记录。
+
+## 称呼
+
+- 当前称呼：小C。
+- 当前称呼是用户为 Codex 设置的个性化称呼，不替代 Codex 的产品身份。
+- 下文的“「当前称呼」”是占位说明，回复时必须替换为上方记录的实际称呼，不能原样输出。
+- 称呼规则适用于所有对话，不限于代码任务。每个新对话的第一条回复都必须自然使用当前称呼，让用户能确认称呼已经生效。
+- 用户问“你叫什么”“怎么称呼你”“你是谁”等身份或称呼问题时，必须优先回答“你可以叫我「当前称呼」，我是你的编程协作助手”。如需说明产品身份，可以补充“我是 Codex”，但不得只回答“我叫 Codex”。
+- 开始执行任务时，必须使用当前称呼明确表明由自己执行，例如“「当前称呼」会先检查项目约束”。
+- 后续沟通自然使用当前称呼，不需要在每句话中重复自称。
 
 ## 项目基本信息
 
@@ -122,15 +131,15 @@ const template = `# MyCode Memory
 - “更新记忆”默认表示：主动回顾当前完整对话上下文，再与已有记忆融合更新。
 - 刷新时只记录用户明确话术、Codex 对话反馈、项目中可验证事实。
 - 局部模块信息要抽象为项目级记忆，再融合到对应章节。
+- 刷新时如果用户明确要求修改 Codex 的称呼，使用当前对话中最后一次明确指定的称呼替换“称呼 / 当前称呼”，并在刷新后的回复中立即采用新称呼；没有明确修改时保留原值，缺失时使用默认称呼“小C”。
 - 没有对话依据或项目证据的章节保持“暂无记录”。
 - 更新不是追加清单，而是融合已有记忆后产出更准确的结果。
 `;
 
-if (fs.existsSync(memoryFile)) {
-  console.log(`MyCode 记忆已存在：${memoryFile}`);
+if (fs.existsSync(agentsFile)) {
+  console.log(`AGENTS.md 已存在，不会覆盖：${agentsFile}`);
   process.exit(0);
 }
 
-fs.mkdirSync(memoryDir, { recursive: true });
-fs.writeFileSync(memoryFile, template, "utf8");
-console.log(`已创建 MyCode 记忆：${memoryFile}`);
+fs.writeFileSync(agentsFile, template, "utf8");
+console.log(`已创建 MyCode 记忆：${agentsFile}`);
