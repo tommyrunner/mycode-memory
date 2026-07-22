@@ -1,7 +1,7 @@
 interface:
   display_name: "MyCode Memory"
-  short_description: "使用 AGENTS.md 维护个性化称呼和项目级编码习惯"
-  default_prompt: "使用 $mycode-memory，确保项目根目录存在 AGENTS.md，并按当前称呼自称；明确刷新时才更新记忆。"
+  short_description: "用标准 AGENTS.md 维护称呼和项目级编码习惯"
+  default_prompt: "使用 $mycode-memory，确保项目根目录存在 AGENTS.md；明确刷新时融合全部有效内容并按标准分类重建。"
 
 policy:
   allow_implicit_invocation: true
